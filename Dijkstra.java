@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 class Vertex {
@@ -63,7 +61,7 @@ public class Dijkstra {
 
 		}
 
-		/*Print awnser shortesPath 0 to n-1*/
+		/*Print vertex and parents*/
 		System.out.println("Result:");
 		for(int i = 0; i < result.length; i++){
 
@@ -78,15 +76,14 @@ public class Dijkstra {
 		/*Print awnser shortesPath 0 to n-1*/
 		System.out.println("shortesPath 0 to "+(result.length-1)+" is: ");
 		String awnser = "";
-		ArrayList<Vertex> list = new ArrayList<Vertex>(Arrays.asList(result));
-		Collections.sort(list, new Comparator<Vertex>() {
-			              @Override
-			              public int compare(final Vertex object1, final Vertex object2) {
-			                  return object1.getId() - object2.getId();
-			              }
-			          });
+		/*Procura o ultimo elemento*/
+		for (Vertex v : result) {
+			if (v.getId() == result.length-1){
+				currentVertex = v;
+				break;
+			}
+		}
 
-		currentVertex = list.get(list.size()-1);
 		awnser = currentVertex.getId()+"";
 		while (currentVertex.getParent() != null){			
 			awnser = currentVertex.getParent().getId()+" -> "+awnser;
